@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Productos from './components/Productos';
 import Layout from './components/Layout';
 import Titulo from './components/Titulo';
+import Navbar from './components/Navbar';
 class App extends Component {
   state = {
     productos : [
@@ -13,6 +14,7 @@ class App extends Component {
   render() {
     return(
       <div>
+        <Navbar />
         <Layout>
           <Titulo />
           <Productos 
