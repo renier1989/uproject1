@@ -13,6 +13,7 @@ class App extends Component {
     carro : [
       // {name : 'Lechuga' , price: 400, img : '/productos/lechuga.jpg', cantidad: 1}, // Ejemplos de la estructura del arreglo 
     ],
+    esCarroVisible: false,
   }
 
   agregarAlCarrito = (producto) => {
@@ -29,8 +30,6 @@ class App extends Component {
       )
       return this.setState({carro: newCar});
     }
-
-
     // esto lo hago si es que no hay valores similares a un producto , añado el primer producto
     return this.setState({
       carro: this.state.carro.concat({
@@ -40,11 +39,23 @@ class App extends Component {
     });
   }
 
+  mostrarCarro = () => {
+    if(!this.state.carro.length){
+      return;
+    }
+    this.setState({esCarroVisible : !this.state.esCarroVisible});
+  }
+
   render() {
-    console.log(this.state.carro);
+    // console.log(this.state.carro);
+    const { esCarroVisible} = this.state;
     return(
       <div>
-        <Navbar carro={this.state.carro} />
+        <Navbar 
+        carro={this.state.carro}
+        esCarroVisible={esCarroVisible}
+        mostrarCarro={this.mostrarCarro}
+         />
         <Layout>
           <Titulo />
           <Productos 
