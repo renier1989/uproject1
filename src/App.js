@@ -17,6 +17,21 @@ class App extends Component {
 
   agregarAlCarrito = (producto) => {
     // console.log(producto);
+    const { carro } = this.state;
+    if(carro.find(pro => pro.name === producto.name)){
+      // creo un nuevo carro con los datos de la cantidad modificados.
+      const newCar = carro.map(x => x.name === producto.name ? ({
+        ...x ,
+        cantidad : x.cantidad + 1,
+      })
+      :
+      x
+      )
+      return this.setState({carro: newCar});
+    }
+
+
+    // esto lo hago si es que no hay valores similares a un producto , añado el primer producto
     return this.setState({
       carro: this.state.carro.concat({
         ...producto,
@@ -29,7 +44,7 @@ class App extends Component {
     console.log(this.state.carro);
     return(
       <div>
-        <Navbar />
+        <Navbar carro={this.state.carro} />
         <Layout>
           <Titulo />
           <Productos 
